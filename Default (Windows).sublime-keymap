@@ -1,0 +1,3 @@
+[
+	{ "keys": ["alt+shift+d"], "command": "generate_naming" }
+]
