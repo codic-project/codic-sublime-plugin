@@ -2,11 +2,11 @@
 Sublime text から [codic](https://codic.jp/) の機能を呼び出すプラグインです。
 
 ## インストール
-1. いまの所Package Contorlには対応していません。レポジトリをダウンロードして、Packagesディレクトリの下に配置してください。
+1. いまの所Package Contorlには対応していません。リポジトリをダウンロードして、Packagesディレクトリの下に配置してください。
 2. インストールしたら、コマンドパレット (Ctrl+Shift+P) -> 「Codic: Set access token」でAccess tokenを設定します。Access tokenは、[codic](https://codic.jp/)にサインアップ後、APIステータスのページより取得できます。
 
 ## 使い方
-Ctrl+Shift+Dで入力パネルが表示されるので、日本語を入力するとネーミングが生成されます。またテキストを選択して、Ctrl+Shift+Dでも実行できます。Macは入力パネルで日本語が入力できないバグがあるので、基本こっちですね。
+コマンドパレット -> 「Codic: Generate naming」(Ctrl+Shift+D) で入力パネルが表示されるので、日本語を入力するとネーミングが生成されます。またテキストを選択して、Ctrl+Shift+Dでも実行できます。Macは入力パネルで日本語が入力できないバグがあるので、基本こっちですね。
 
 ![codic plugin](https://codic.jp/external/github/sublime.png)
 
