@@ -46,7 +46,7 @@ class SelectProjectCommand(sublime_plugin.ApplicationCommand):
 		sublime_plugin.ApplicationCommand.__init__(self, *args, **kwargs)
 
 	def description(self, args):
-		return "Select project"
+		return "Select Project"
 
 	def run(self):
 		settings = sublime.load_settings(Constants.SETTINGS_FILE)
@@ -92,7 +92,7 @@ class ChangeLetterCaseCommand(sublime_plugin.ApplicationCommand):
 		self.ids =        [ 'pascal', 'camel', 'lower underscore', 'upper underscore', 'hyphen', '' ]
 
 	def description(self, args):
-		return "Change letter case"
+		return "Select Letter Case"
 
 	def run(self):
 		settings = sublime.load_settings(Constants.SETTINGS_FILE)
@@ -117,7 +117,7 @@ class SetAccessTokenCommand(sublime_plugin.ApplicationCommand):
 		self.candidatesValues = []
 
 	def description(self, args):
-		return "Set access token"
+		return "Set Access Token"
 
 	def run(self):
 		settings = sublime.load_settings(Constants.SETTINGS_FILE)
@@ -139,7 +139,7 @@ class GenerateNamingCommand(sublime_plugin.TextCommand):
 		self.settings = sublime.load_settings(Constants.SETTINGS_FILE)
 
 	def description(self, args):
-		return "Generate naming"
+		return "Generate Naming"
 
 	def run(self, edit):
 		text = None
