@@ -4,7 +4,7 @@ Sublime text から [codic](https://codic.jp/) の機能を呼び出すプラグ
 ## インストール
 いまの所Package Contorlには対応していません。以下の手順で、Githubからインストールしてください。
 
-1. コマンドパレット (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>) から  "Package Control: Add Repository" を選択し、以下のURLを追加。
+1. コマンドパレット <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> から  "Package Control: Add Repository" を選択し、以下のURLを追加。
  
  `https://github.com/kenji-namba/codic-sublime-plugin`
 
