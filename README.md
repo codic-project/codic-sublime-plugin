@@ -1,6 +1,8 @@
 # Codic sublime text プラグイン
 Sublime text から [codic](https://codic.jp/) の機能を呼び出すプラグインです。
 
+![codic plugin](https://raw.githubusercontent.com/kenji-namba/codic-sublime-plugin/master/screenshot.png)
+
 ## インストール
 いまの所Package Contorlには対応していません。以下の手順で、Githubからインストールしてください。
 
@@ -14,8 +16,6 @@ Sublime text から [codic](https://codic.jp/) の機能を呼び出すプラグ
 
 ## 使い方
 コマンドパレット → "Codic: Generate Naming" <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> で入力パネルが表示されるので、日本語を入力するとネーミングが生成されます。またテキストを選択して、Ctrl+Shift+Dでも実行できます。Macは入力パネルで日本語が入力できないバグがあるので、基本こっちですね。
-
-![codic plugin](https://raw.githubusercontent.com/kenji-namba/codic-sublime-plugin/master/screenshot.png)
 
 ## その他コマンド
 - プロジェクトの変更 - コマンドパレット → "Codic: Select project"
