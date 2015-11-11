@@ -5,10 +5,14 @@ import threading
 import json
 import urllib
 
-# http://code.tutsplus.com/tutorials/how-to-create-a-sublime-text-2-plugin--net-2268
-class Constants: 
-	SETTINGS_FILE = 'CodicCommands.sublime-settings'
 
+class Constants: 
+	SETTINGS_FILE = 'Codic.sublime-settings'
+
+def defailt_s(str):
+	if str is None:
+		return ''
+	return str
 
 class CodicAPI(object):
 	def __init__(self, access_token):
@@ -22,8 +26,7 @@ class CodicAPI(object):
 		thread.start()
 
 	def translate(self, project_id, source_text, options, callback, context):
-		print(options['letter_case'])
-		uri = self.host+"/v1/engine/translate.json?"+ urllib.parse.urlencode({'text':source_text, 'project_id':project_id, 'casing': options['letter_case'] })
+		uri = self.host+"/v1/engine/translate.json?"+ urllib.parse.urlencode({'text':defailt_s(source_text), 'project_id':defailt_s(project_id), 'casing': options['letter_case'] })
 		thread = threading.Thread(target=self, args=(uri, callback, context))
 		thread.setDaemon(True)
 		thread.start()
@@ -91,9 +94,6 @@ class ChangeLetterCaseCommand(sublime_plugin.ApplicationCommand):
 		self.selections = [ '[Aa] PascalCase', '[aA] camelCase', '[a_a] Lower underscore', '[A_A] Upper underscore', '[a-a] Hyphenation', '[a a] None' ]
 		self.ids =        [ 'pascal', 'camel', 'lower underscore', 'upper underscore', 'hyphen', '' ]
 
-	def description(self, args):
-		return "Select Letter Case"
-
 	def run(self):
 		settings = sublime.load_settings(Constants.SETTINGS_FILE)
 		selected = 0
@@ -106,6 +106,9 @@ class ChangeLetterCaseCommand(sublime_plugin.ApplicationCommand):
 		sublime.set_timeout(lambda: sublime.active_window().show_quick_panel(self.selections, self.on_select, 0, selected), 1)
 
 	def on_select(self, index):
+		if index == -1:
+			return
+
 		settings = sublime.load_settings(Constants.SETTINGS_FILE)
 		settings.set("letter_case", self.ids[index])
 		sublime.save_settings(Constants.SETTINGS_FILE)
@@ -115,9 +118,6 @@ class SetAccessTokenCommand(sublime_plugin.ApplicationCommand):
 		sublime_plugin.ApplicationCommand.__init__(self, *args, **kwargs)
 		self.candidates = []
 		self.candidatesValues = []
-
-	def description(self, args):
-		return "Set Access Token"
 
 	def run(self):
 		settings = sublime.load_settings(Constants.SETTINGS_FILE)
@@ -138,22 +138,22 @@ class GenerateNamingCommand(sublime_plugin.TextCommand):
 		self.candidates = []
 		self.settings = sublime.load_settings(Constants.SETTINGS_FILE)
 
-	def description(self, args):
-		return "Generate Naming"
-
 	def run(self, edit):
 		text = None
 		for region in self.view.sel():
 			if not region.empty():
 				text = self.view.substr(region)
 
-		if text is None:
-			sublime.active_window().show_input_panel('Text to generate [ja]', '', None, lambda text_: self.on_input(text_, edit), None)
+		if text is None or text == '':
+			sublime.active_window().show_input_panel('Text to generate [ja]', '', lambda text_: self.on_input(text_, edit), None, None)
 			return
 
 		self.on_input(text, edit)
 
 	def on_input(self, text, edit):
+		if text is None or text == '':
+			return
+
 		access_token = self.settings.get('access_token')
 		if (access_token is None):
 			sublime.set_timeout(lambda: sublime.error_message(u"Access token required."), 1)
@@ -171,7 +171,7 @@ class GenerateNamingCommand(sublime_plugin.TextCommand):
 			sublime.set_timeout(lambda: sublime.error_message(u'Failed to call API, due to : '+result['errors'][0]['message']), 1)
 			return
 
-		if len(result[0]['words']) == 1:
+		if len(result[0]['words']) == 1 and result[0]['words'][0]['successful']:
 			self.candidates = list(map(lambda t:t.get('text'), result[0].get('words')[0].get('candidates')))
 		else:
 			self.candidates = [ result[0].get('translated_text') ]	
