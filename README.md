@@ -18,8 +18,8 @@ Sublime text から [codic](https://codic.jp/) の機能を呼び出すプラグ
 コマンドパレット → "Codic: Generate Naming" <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> で入力パネルが表示されるので、日本語を入力するとネーミングが生成されます。またテキストを選択して、Ctrl+Shift+Dでも実行できます。Macは入力パネルで日本語が入力できないバグがあるので、基本こっちですね。
 
 ## その他コマンド
-- プロジェクトの変更 - コマンドパレット → "Codic: Select project"
-- ケースの変更 - コマンドパレット →  "Codic: Select letter case"
+- プロジェクトの変更 - コマンドパレット → "Codic: Select Project"
+- ケースの変更 - コマンドパレット →  "Codic: Select Letter Case"
 
 ## その他
 codicのプラグインは、他にも以下があります。基本的には同じAPIを使っているので機能に違いはありせんので、
