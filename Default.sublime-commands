@@ -1,18 +1,18 @@
 [
     {
-        "caption": "Codic: Generate naming",
+        "caption": "Codic: Generate Naming",
         "command": "generate_naming"
     },
     {
-        "caption": "Codic: Set access token",
+        "caption": "Codic: Set Access Token",
         "command": "set_access_token"
     },
     {
-        "caption": "Codic: Select project",
+        "caption": "Codic: Select Project",
         "command": "select_project"
     },
     {
-        "caption": "Codic: Change letter case",
+        "caption": "Codic: Change Letter Case",
         "command": "change_letter_case"
     }    
 ]
