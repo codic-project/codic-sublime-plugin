@@ -12,7 +12,7 @@
         "command": "select_project"
     },
     {
-        "caption": "Codic: Change Letter Case",
+        "caption": "Codic: Select Letter Case",
         "command": "change_letter_case"
     }    
 ]
