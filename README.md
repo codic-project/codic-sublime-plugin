@@ -19,7 +19,7 @@ Sublime text から [codic](https://codic.jp/) の機能を呼び出すプラグ
 
 ## その他コマンド
 - プロジェクトの変更 - コマンドパレット → "Codic: Select Project"
-- ケースの変更 - コマンドパレット →  "Codic: Select Letter Case"
+- 生成されるネーミングのケースの変更 - コマンドパレット →  "Codic: Select Letter Case"
 
 ## その他
 codicのプラグインは、他にも以下があります。基本的には同じAPIを使っているので機能に違いはありせんので、
