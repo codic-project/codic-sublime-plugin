@@ -1,7 +1,7 @@
 # Codic sublime text プラグイン
 Sublime text から [codic](https://codic.jp/) の機能を呼び出すプラグインです。
 
-![codic plugin](https://raw.githubusercontent.com/kenji-namba/codic-sublime-plugin/master/screenshot.png)
+![codic plugin](https://raw.githubusercontent.com/codic-project/codic-sublime-plugin/master/screenshot.png)
 
 ## インストール
 いまの所Package Contorlには対応していません。以下の手順で、Githubからインストールしてください。
