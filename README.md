@@ -1,4 +1,4 @@
-# Codic sublime text プラグイン
+# Codic Sublime Text Plugin
 Sublime text から [codic](https://codic.jp/) の機能を呼び出すプラグインです。
 
 ![codic plugin](https://raw.githubusercontent.com/codic-project/codic-sublime-plugin/master/screenshot.png)
