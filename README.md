@@ -10,7 +10,7 @@ Sublime text から [codic](https://codic.jp/) の機能を呼び出すプラグ
  
  `https://github.com/kenji-namba/codic-sublime-plugin`
 
-2. コマンドパレット <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> →  "Package Control: Install Package" を選択し、「codic-sublime-text」を選択し、インストール。
+2. コマンドパレット <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> →  "Package Control: Install Package" を選択し、「codic-sublime-plugin」を選択し、インストール。
 
 3. コマンドパレット <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> → "Codic: Set Access Token" でAccess tokenを設定。Access tokenは、[codic](https://codic.jp/)にサインアップ後、APIステータスのページより取得できます。
 
