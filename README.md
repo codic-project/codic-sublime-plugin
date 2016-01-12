@@ -8,7 +8,7 @@ Sublime text から [codic](https://codic.jp/) の機能を呼び出すプラグ
 
 1. コマンドパレット <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> →  "Package Control: Add Repository" を選択し、以下のURLを追加。
  
- `https://github.com/kenji-namba/codic-sublime-plugin`
+ `https://github.com/codic-project/codic-sublime-plugin`
 
 2. コマンドパレット <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> →  "Package Control: Install Package" を選択し、「codic-sublime-plugin」を選択し、インストール。
 
