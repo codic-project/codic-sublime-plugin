@@ -1,7 +1,7 @@
 # Codic Sublime Text Plugin
 Sublime text から [codic](https://codic.jp/) の機能を呼び出すプラグインです。
 
-![codic plugin](https://raw.githubusercontent.com/codic-project/codic-sublime-plugin/master/screenshot.png)
+![codic plugin](./screenshot.png)
 
 ## インストール
 いまの所Package Contorlには対応していません。以下の手順で、Githubからインストールしてください。
@@ -25,8 +25,8 @@ Sublime text から [codic](https://codic.jp/) の機能を呼び出すプラグ
 codicのプラグインは、他にも以下があります。基本的には同じAPIを使っているので機能に違いはありせんので、
 使い易いヤツを選んだらいいと思います。
 
-- [https://bitbucket.org/dat/sublimecodic](https://bitbucket.org/dat/sublimecodic) - 高機能
-- [https://github.com/airtoxin/codic-sublime](https://github.com/airtoxin/codic-sublime) - Package Controlに対応
+- <https://github.com/naoyukik/SublimeCodic> - 高機能
+- <https://github.com/airtoxin/codic-sublime> - Package Controlに対応
 
 ## TODO
 - Supports Multi-selection / Multiline selection.
