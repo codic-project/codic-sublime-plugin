@@ -8,8 +8,10 @@ import urllib
 
 class Constants: 
 	SETTINGS_FILE = 'Codic.sublime-settings'
+	LETTER_CASE_CAPTIONS = [ 'PascalCase [Aa]', 'camelCase [aA]', 'Lower Underscore [a_a]', 'Upper Underscore [A_A]', 'Hyphenation [a-a]', 'None [a a]' ]
+	LETTER_CASE_IDS = [ 'pascal', 'camel', 'lower underscore', 'upper underscore', 'hyphen', '' ]
 
-def defailt_s(str):
+def default_s(str):
 	if str is None:
 		return ''
 	return str
@@ -26,7 +28,7 @@ class CodicAPI(object):
 		thread.start()
 
 	def translate(self, project_id, source_text, options, callback, context):
-		uri = self.host+"/v1/engine/translate.json?"+ urllib.parse.urlencode({'text':defailt_s(source_text), 'project_id':defailt_s(project_id), 'casing': options['letter_case'] })
+		uri = self.host+"/v1/engine/translate.json?"+ urllib.parse.urlencode({'text':default_s(source_text), 'project_id':default_s(project_id), 'casing': options['letter_case'] })
 		thread = threading.Thread(target=self, args=(uri, callback, context))
 		thread.setDaemon(True)
 		thread.start()
@@ -75,6 +77,7 @@ class SelectProjectCommand(sublime_plugin.ApplicationCommand):
 		except ValueError as e:
 			selected = 0
 			pass
+		
 		sublime.set_timeout(lambda: sublime.active_window().show_quick_panel(selections, self.on_select, 0, selected), 1)
 
 	def on_select(self, index):
@@ -89,35 +92,30 @@ class SelectProjectCommand(sublime_plugin.ApplicationCommand):
 class ChangeLetterCaseCommand(sublime_plugin.ApplicationCommand):
 	def __init__(self, *args, **kwargs):
 		sublime_plugin.ApplicationCommand.__init__(self, *args, **kwargs)
-		self.candidates = []
-		self.candidatesValues = []
-		self.selections = [ '[Aa] PascalCase', '[aA] camelCase', '[a_a] Lower underscore', '[A_A] Upper underscore', '[a-a] Hyphenation', '[a a] None' ]
-		self.ids =        [ 'pascal', 'camel', 'lower underscore', 'upper underscore', 'hyphen', '' ]
 
 	def run(self):
 		settings = sublime.load_settings(Constants.SETTINGS_FILE)
 		selected = 0
+
 		try:
-			selected = self.ids.index(settings.get("letter_case"))
+			selected = Constants.LETTER_CASE_IDS.index(settings.get("letter_case"))
 		except ValueError as e:
 			selected = 0
 			pass
-
-		sublime.set_timeout(lambda: sublime.active_window().show_quick_panel(self.selections, self.on_select, 0, selected), 1)
+		
+		sublime.set_timeout(lambda: sublime.active_window().show_quick_panel(Constants.LETTER_CASE_CAPTIONS, self.on_select, 0, selected), 1)
 
 	def on_select(self, index):
 		if index == -1:
 			return
 
 		settings = sublime.load_settings(Constants.SETTINGS_FILE)
-		settings.set("letter_case", self.ids[index])
+		settings.set("letter_case", Constants.LETTER_CASE_IDS[index])
 		sublime.save_settings(Constants.SETTINGS_FILE)
 
 class SetAccessTokenCommand(sublime_plugin.ApplicationCommand):
 	def __init__(self, *args, **kwargs):
 		sublime_plugin.ApplicationCommand.__init__(self, *args, **kwargs)
-		self.candidates = []
-		self.candidatesValues = []
 
 	def run(self):
 		settings = sublime.load_settings(Constants.SETTINGS_FILE)
@@ -164,6 +162,7 @@ class GenerateNamingCommand(sublime_plugin.TextCommand):
 		api = CodicAPI(access_token)
 
 		# TODO : Supports multi-line text and multi selection.
+		print(letter_case)
 		api.translate(project_id, text, {'letter_case': letter_case}, self.on_load, {'edit':edit})
 
 	def on_load(self, status, result, context):
@@ -171,18 +170,30 @@ class GenerateNamingCommand(sublime_plugin.TextCommand):
 			sublime.set_timeout(lambda: sublime.error_message(u'Failed to call API, due to : '+result['errors'][0]['message']), 1)
 			return
 
-		if len(result[0]['words']) == 1 and result[0]['words'][0]['successful']:
-			self.candidates = list(map(lambda t:t.get('text'), result[0].get('words')[0].get('candidates')))
-		else:
-			self.candidates = [ result[0].get('translated_text') ]	
+		self.candidates = [ result[0].get('translated_text') ]	
+		#if len(result[0]['words']) == 1 and result[0]['words'][0]['successful']:
+		#	self.candidates = list(map(lambda t:t.get('text'), result[0].get('words')[0].get('candidates')))
+		#else:
+		#	self.candidates = [ result[0].get('translated_text') ]	
 
+		self.candidates.append("-")
+		for caption in Constants.LETTER_CASE_CAPTIONS:
+			self.candidates.append(caption)
+		
 		view = sublime.active_window().active_view()
 		view.show_popup_menu(self.candidates, lambda i:self.on_select(i, context))
 
 	def on_select(self, index, context):
 		if index == -1:
 			return
-
+		
+		if index > len(self.candidates) - len(Constants.LETTER_CASE_CAPTIONS) - 1:
+			letter_case = Constants.LETTER_CASE_IDS[index - len(self.candidates)]
+			self.settings.set("letter_case", letter_case)
+			sublime.save_settings(Constants.SETTINGS_FILE)
+			self.view.run_command("generate_naming")
+			return
+		
 		text_to_replace = self.candidates[index];
 		
 		#sublime.set_timeout(lambda: self.view.insert(context['edit'], 0, text_to_replace), 1)

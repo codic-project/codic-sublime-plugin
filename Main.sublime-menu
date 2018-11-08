@@ -1,0 +1,41 @@
+[
+    {
+        "id": "tools",
+        "children": [
+        	{
+        		"id": "codicSeparatorMenu",
+        		"caption": "-"
+        	},
+        	{
+        		"id": "codicMenu",
+        		"caption": "Codic", 
+        		"children": [
+					{
+						"id": "CodicSeparator1Menu",
+						"caption": "-"
+					},
+					{
+						"id": "CodicGenerateNamingMenu",
+						"caption": "Generate Naming",
+						"command": "generate_naming"
+					},
+					{
+						"id": "CodicSelectProjectMenu",
+						"caption": "Change Letter Case",
+						"command": "change_letter_case"
+					},
+					{
+						"id": "CodicSelectProjectMenu",
+						"caption": "Select Project",
+						"command": "select_project"
+					},
+					{
+						"id": "CodicSetAccessTokenMenu",
+						"caption": "Set Access Token",
+						"command": "set_access_token"
+					}
+				]
+        	}
+        ]
+    }
+]

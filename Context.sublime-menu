@@ -1,0 +1,11 @@
+[
+    {
+        "id": "CodicSeparatorContextMenu",
+        "caption": "-"
+    },
+    {
+        "id": "CodicGenerateNamingContextMenu",
+        "caption": "Codic: Generate Naming",
+        "command": "generate_naming"
+    }
+]
