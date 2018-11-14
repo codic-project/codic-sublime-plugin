@@ -28,7 +28,7 @@ class CodicAPI(object):
 		thread.start()
 
 	def translate(self, project_id, source_text, options, callback, context):
-		uri = self.host+"/v1/engine/translate.json?"+ urllib.parse.urlencode({'text':default_s(source_text), 'project_id':default_s(project_id), 'casing': options['letter_case'] })
+		uri = self.host+"/v1.1/engine/translate.json?"+ urllib.parse.urlencode({'text':default_s(source_text), 'project_id':default_s(project_id), 'casing': options['letter_case'] })
 		thread = threading.Thread(target=self, args=(uri, callback, context))
 		thread.setDaemon(True)
 		thread.start()
@@ -162,19 +162,18 @@ class GenerateNamingCommand(sublime_plugin.TextCommand):
 		api = CodicAPI(access_token)
 
 		# TODO : Supports multi-line text and multi selection.
-		print(letter_case)
 		api.translate(project_id, text, {'letter_case': letter_case}, self.on_load, {'edit':edit})
 
 	def on_load(self, status, result, context):
 		if status != 200:
 			sublime.set_timeout(lambda: sublime.error_message(u'Failed to call API, due to : '+result['errors'][0]['message']), 1)
 			return
-
-		self.candidates = [ result[0].get('translated_text') ]	
-		#if len(result[0]['words']) == 1 and result[0]['words'][0]['successful']:
-		#	self.candidates = list(map(lambda t:t.get('text'), result[0].get('words')[0].get('candidates')))
-		#else:
-		#	self.candidates = [ result[0].get('translated_text') ]	
+		
+		#self.candidates = [ result[0].get('translated_text') ]	
+		if len(result[0]['words']) == 1 and result[0]['words'][0]['successful']:
+			self.candidates = list(map(lambda t:t.get('text_in_casing'), result[0].get('words')[0].get('candidates')))
+		else:
+			self.candidates = [ result[0].get('translated_text') ]	
 
 		self.candidates.append("-")
 		for caption in Constants.LETTER_CASE_CAPTIONS:
