@@ -8,7 +8,7 @@ import urllib
 
 class Constants: 
 	SETTINGS_FILE = 'Codic.sublime-settings'
-	LETTER_CASE_CAPTIONS = [ 'PascalCase [Aa]', 'camelCase [aA]', 'Lower Underscore [a_a]', 'Upper Underscore [A_A]', 'Hyphenation [a-a]', 'None [a a]' ]
+	LETTER_CASE_CAPTIONS = [ 'PascalCase', 'camelCase', 'lower_underscore', 'UPPER_UNDERSCORE', 'lower-chain-case', 'None' ]
 	LETTER_CASE_IDS = [ 'pascal', 'camel', 'lower underscore', 'upper underscore', 'hyphen', '' ]
 
 def default_s(str):
@@ -173,7 +173,7 @@ class GenerateNamingCommand(sublime_plugin.TextCommand):
 		if len(result[0]['words']) == 1 and result[0]['words'][0]['successful']:
 			self.candidates = list(map(lambda t:t.get('text_in_casing'), result[0].get('words')[0].get('candidates')))
 		else:
-			self.candidates = [ result[0].get('translated_text') ]	
+			self.candidates = [ result[0].get('translated_text_in_casing') ]	
 
 		self.candidates.append("-")
 		for caption in Constants.LETTER_CASE_CAPTIONS:
